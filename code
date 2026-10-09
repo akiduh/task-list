@@ -1,0 +1,52 @@
+def main():
+    tasks = []
+
+    while True:
+        print("\n--- Меню ---")
+        print("1. Добавить задачу")
+        print("2. Показать список задач")
+        print("3. Удалить задачу")
+        print("4. Выход")
+        
+        choice = input("Выберите пункт меню (1-4): ")
+
+        if choice == '1':
+            task_text = input("Введите текст задачи: ").strip()
+            if task_text:
+                tasks.append(task_text)
+                print("Задача добавлена.")
+            else:
+                print("Текст задачи не может быть пустым.")
+
+        elif choice == '2':
+            if not tasks:
+                print("\nСписок задач пуст.")
+            else:
+                print("\nСписок задач:")
+                for index, task in enumerate(tasks, start=1):
+                    print(f"{index}. {task}")
+
+        elif choice == '3':
+            if not tasks:
+                print("Список задач пуст. Нечего удалять.")
+                continue
+            
+            try:
+                task_num = int(input("Введите номер задачи для удаления: "))
+                if 1 <= task_num <= len(tasks):
+                    removed_task = tasks.pop(task_num - 1)
+                    print(f"Задача '{removed_task}' удалена.")
+                else:
+                    print(f"Ошибка: номер должен быть от 1 до {len(tasks)}.")
+            except ValueError:
+                print("Ошибка: введите корректное число.")
+
+        elif choice == '4':
+            print("Выход из программы. До свидания!")
+            break
+
+        else:
+            print("Некорректный выбор. Пожалуйста, введите число от 1 до 4.")
+
+if __name__ == "__main__":
+    main()
